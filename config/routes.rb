@@ -5,10 +5,19 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+  root 'sessions#new'
+  resource :session, only: [:new, :create, :destroy]
+  resource :game, only: [:show]
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # All actions that modify the state of decks
+  scope '/game', controller: 'decks' do
+    post 'add_deck'
+    delete 'decks/:deck_id', action: :remove_deck, as: :remove_deck
+    post 'decks/:deck_id/shuffle', action: :shuffle, as: :shuffle_deck
+    post 'decks/:deck_id/shuffle_with_discard', action: :shuffle_with_discard, as: :shuffle_with_discard
+    post 'decks/:deck_id/draw', action: :draw, as: :draw_card
+    post 'decks/move_random', action: :move_random, as: :move_random_card
+    post 'decks/move_specific', action: :move_specific, as: :move_specific_card
+    post 'decks/merge', action: :merge, as: :merge_decks
+  end
 end

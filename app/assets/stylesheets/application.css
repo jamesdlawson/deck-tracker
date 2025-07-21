@@ -8,3 +8,37 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+body {
+  font-family: sans-serif;
+  padding: 1rem;
+}
+
+#session-decks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.deck-container {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+#controls,
+.deck-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inline-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+button,
+input[type="submit"] {
+  cursor: pointer;
+}

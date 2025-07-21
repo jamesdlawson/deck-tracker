@@ -1,0 +1,16 @@
+{
+  "deck": {
+    "name": "Standard 52-Card Deck",
+    "cards": [
+      {
+        "name": "Ace of Spades"
+      },
+      {
+        "name": "2 of Spades"
+      },
+      {
+        "name": "3 of Spades"
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+<h1>Session: <%= @session_id %></h1>
+<p><%= link_to "Terminate Session", session_path, data: { "turbo-method": :delete, "turbo-confirm": "Are you sure?" } %></p>
+
+<div id="controls">
+  <h3>Session Controls</h3>
+  <%= form_with url: add_deck_path, method: :post do |f| %>
+    <%= f.select :deck_name, options_for_select(@available_decks) %>
+    <%= f.submit "Add Deck", "hx-post": add_deck_path, "hx-target": "#session-decks", "hx-swap": "innerHTML" %>
+  <% end %>
+</div>
+
+<hr>
+
+<div id="session-decks">
+  <%= render partial: 'game/session_decks', locals: { session_state: @session_state } %>
+</div>

@@ -1,0 +1,15 @@
+<div class="deck-container">
+  <h3><%= deck.name %> (ID: <%= deck.id.split('.').first %>)</h3>
+  <p>Cards: <%= deck.cards.count %></p>
+  <p>Discard: <%= deck.discard_pile.count %></p>
+
+  <button hx-post="<%= shuffle_deck_path(deck.id) %>" hx-target="#deck_<%= deck.id %>" hx-swap="outerHTML">Shuffle</button>
+  <button hx-post="<%= shuffle_with_discard_path(deck.id) %>" hx-target="#deck_<%= deck.id %>" hx-swap="outerHTML">Shuffle w/ Discard</button>
+
+  <%= form_with url: draw_card_path(deck.id), method: :post, class: "inline-form" do |f| %>
+    <%= f.number_field :count, value: 1, min: 1, style: "width: 40px;" %>
+    <%= f.submit "Draw", "hx-post": draw_card_path(deck.id), "hx-target": "#session-decks" %>
+  <% end %>
+
+  <button hx-delete="<%= remove_deck_path(deck.id) %>" hx-target="#session-decks" hx-confirm="Remove this deck?">Remove Deck</button>
+</div>

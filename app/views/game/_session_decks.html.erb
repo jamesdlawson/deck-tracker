@@ -1,0 +1,5 @@
+<% session_state.decks.each do |deck| %>
+  <div id="deck_<%= deck.id %>" class="deck-wrapper">
+    <%= render partial: 'game/deck', locals: { deck: deck } %>
+  </div>
+<% end %>
